@@ -10,6 +10,10 @@ photos.push({
 });
 
 exports.list = function(req, res) {
+  res.locals = {
+    apptitle: 'Pure Imagination'
+  };
+
   res.render('photos', {
     title: 'Delicious Photos',
     photos: photos
