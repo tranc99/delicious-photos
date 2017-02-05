@@ -17,22 +17,25 @@ photos.push({
   path: '/images/foods.jpg'
 });
 
-var savedPhotos;
-
-Photo.find({}, function(err, loadedPhotos) {
-  if (err) savedPhotos = photos;
-  savedPhotos = loadedPhotos;
-});
+// var savedPhotos;
 
 exports.list = function(req, res) {
-  res.locals = {
-    apptitle: 'Pure Imagination',
-    savedPhotos: savedPhotos
-  };
+  var savedPhotos;
 
-  res.render('photos', {
-    title: 'Delicious Photos',
-    photos: photos
+  Photo.find({}, function(err, loadedPhotos) {
+    if (err) savedPhotos = photos;
+    savedPhotos = loadedPhotos;
+
+    res.locals = {
+      apptitle: 'Pure Imagination',
+      savedPhotos: savedPhotos
+    };
+
+    res.render('photos', {
+      title: 'Delicious Photos',
+      photos: photos
+    });
+
   });
 };
 
@@ -64,7 +67,7 @@ exports.submit = function(dir) {
 
         mPhoto.save(function(err, thePhoto) {
           if (err) console.log('An error saving ' + err);
-          res.redirect('/upload');
+          res.redirect('/');
         });
       });
 
