@@ -104,7 +104,13 @@ exports.download = function(dir) {
     Photo.findById(id, function(err, photo) {
       if (err) return next(err);
       var path = join(dir, photo.path);
-      res.sendfile(path);
+      // res.sendfile(path);
+      var nameLength = photo.path.length;
+      var extIndex = photo.path.indexOf('.');
+      var negIndex = extIndex - nameLength;
+      var extn = path.substr(extIndex, nameLength);
+      var filename = photo.name + extn;
+      res.download(path, photo.name);
     });
   };
 };
