@@ -33,6 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', users);
 app.get('/upload', photos.form);
 app.post('/upload', photos.submit(app.get('photos')));
+app.get('/photo/:id/download', photos.download(app.get('photos')));
 app.use('/', photos.list);
 
 // catch 404 and forward to error handler
