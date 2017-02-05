@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/photo_app');
 
-var schema = new mongoose.Schema({
+console.log('calling the Photo model module');
+
+var schema = mongoose.Schema({
   name: String,
   path: String
 });
