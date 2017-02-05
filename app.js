@@ -27,8 +27,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', photos.list);
+//app.use('/', photos.list);
 app.use('/users', users);
+app.get('/upload', photos.form);
+app.post('/upload', photos.submit(app.get('photos')));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
